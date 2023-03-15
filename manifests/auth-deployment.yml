@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: Deployment-auth
+  name: deployment-auth
   labels: 
     app : auth 
 
@@ -12,30 +12,31 @@ spec:
   selector:
     matchLabels:
       app: auth
-  
-  template:
-    metadata:
-      labels:
-        app: auth
 
   replicas: 2
 
   strategy:
-      type: RollingUpdate
-      maxSurge: 3
-      maxUnavailable: 1
-  spec:
-    containers:
-    - name: auth
-      image: abdelrhmanhamdy/auth
-      resources:
-        limits:
-          memory: "128Mi"
-          cpu: "500m"
-      ports:
-      - containerPort: 5000
-    - envFrom: 
-      - configMapRef :
-        name : auth-configmap
-      - secretRef:
-        name: auth-secret
+    rollingUpdate:
+     maxSurge: 3
+     maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+      - name: auth
+        image: abdelrhmanhamdy/auth
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+
+        envFrom: 
+        - configMapRef :
+            name : auth-configmap
+        - secretRef:
+            name: auth-secret
