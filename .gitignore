@@ -1,3 +1,4 @@
 *.txt
 *.png
 python/src/auth/venv/
+python/src/gateway/venv/
