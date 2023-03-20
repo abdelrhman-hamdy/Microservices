@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: abdelrhmanhamdy/auth
+        image: abdelrhmanhamdy/auth:latest
         resources:
           limits:
             memory: "128Mi"

@@ -17,10 +17,9 @@ def login():
     if not auth: 
         return "Missing Credentials" , 401
 
-    query=mysqlcuror.execute( f'SELECT email,Password FROM auth.user WHERE email="{auth.username}"' )
-    if query > 0 : 
-        row_data=mysqlcuror.fetchone()
-
+    mysqlcuror.execute( f'SELECT email,Password FROM auth.user WHERE email="{auth.username}"' )
+    row_data=mysqlcuror.fetchone()
+    if len(row_data) > 0 : 
         if row_data[1] != auth.password:
             return "Wrong Credentials" , 401
         return createJWT(auth.username,os.getenv("JWT_SECRET"),True)

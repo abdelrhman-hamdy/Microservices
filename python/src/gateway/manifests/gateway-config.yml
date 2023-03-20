@@ -4,5 +4,5 @@ metadata:
   name: gateway-config
   labels:
     app: gateway 
-stringData:
-  AUTH_SERVICE_IP: "auth:5000"
+data:
+  AUTH_SERVICE_IP: auth:5000

@@ -20,7 +20,7 @@ channel = connection.channel()
 def login(): 
     url= f'http://{auth_pod_ip}/login'
 
-    response = requests.post(url,auth = request.authorization )
+    response = requests.post(url,auth=(request.authorization.username,request.authorization.password) )
     if response.status_code == 200 : 
         return response.text 
     else : 
