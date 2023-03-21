@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: converter-deployment
+
+  labels:
+
+    app: converter
+
+spec:
+
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge : 1
+      maxUnavailable : 1
+
+  selector:
+    matchLabels:
+      app: converter
+
+  template:
+
+    metadata:
+      labels:
+        app: converter
+
+    spec:
+      containers:
+      - name: converter
+        image: abdelrhmanhamdy/converter:testv1
+        envFrom: 
+        - configMapRef:
+            name:  converter-config
